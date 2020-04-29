@@ -1,5 +1,9 @@
 import "./styles/index.scss";
 import Game from './game';
+import { setupControls } from './controls';
+
+export let game = null;
+// setupControls();
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas");
@@ -10,6 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.stroke();
   // ctx.closePath();
 
-  const newGame = new Game(canvas, ctx);
-  newGame.start();
+  game = new Game(canvas, ctx);
+  game.start();
 })
