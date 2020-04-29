@@ -12,7 +12,7 @@ Users will be able to move around their ship within the window freely using thei
 * Users can upgrade damage or health
 
 ## WireFrames
-![alt text](https://github.com/cjchoi97/celestial-struggle/blob/master/celestial-sky-wireframe.png "wireframe")
+![alt text](https://github.com/cjchoi97/celestial-struggle/blob/master/celestial-struggle-wireframe.png "wireframe")
 
 ## Architecture and Technology
 * Javascript for game logic
