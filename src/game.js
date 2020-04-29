@@ -28,12 +28,13 @@ class Game {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.renderBackground();
     this.player.draw();
-    // window.requestAnimationFrame(this.draw); 
+    requestAnimationFrame(this.draw); 
   }
 
   start() {
-    requestAnimationFrame(this.draw)
-    // setInterval(this.draw(), 10);
+  requestAnimationFrame(this.draw)
+  setInterval(this.player.fireProjectile, 1000/1);
+  // setInterval(this.draw(), 10);
   }
 }
 

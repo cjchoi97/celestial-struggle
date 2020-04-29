@@ -13,7 +13,7 @@ class Controls {
 
   keyDownHandler(e) {
     // console.log(this.keydown);
-    console.log("pressed");
+    // console.log("pressed");
     // this.keydown = true;
     if (game.player) {
       if (e.key === "ArrowRight") {
@@ -46,18 +46,3 @@ class Controls {
 }
 
 export default Controls;
-
-
-
-
-// export const setupControls = () => {
-//   addEventListener(document, 'keydown', keyDownHandler);
-//   window.document.on('keyup', keyUpHandler);
-
-// };
-// document.addEventListener("keyup", event => keyUpHandler(event));
-
-// export const removeControls = () => {
-//   window.document.off('keydown', keyDownHandler);
-//   window.document.off('keyup', keyUpHandler);
-// };

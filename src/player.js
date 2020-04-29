@@ -1,3 +1,5 @@
+import Projectile from "./projectile";
+
 class Player {
   constructor(ctx) {
     this.ctx = ctx;
@@ -11,6 +13,9 @@ class Player {
     this.draw = this.draw.bind(this);
     this.dx = 0;
     this.dy = 0;
+
+    this.fireProjectile = this.fireProjectile.bind(this);
+    // this.fire = this.fire.bind(this);
   }
 
   moveHorizontally(speed) {
@@ -22,16 +27,30 @@ class Player {
     this.dy = speed;
   }
 
-  fireMissile() {
+  // fire() {
+  //   setInterval(this.fireProjectile, 1000);
+  // }
 
+  fireProjectile() {
+
+    // console.log("im here");
+    const projectile = new Projectile({
+      x: this.x + 21,
+      y: this.y,
+      ctx: this.ctx
+    })
+    // console.log("MADE PROJECTILE")
+
+    projectile.draw();
   }
 
   draw() {
     // debugger
     this.x += this.dx;
     this.y += this.dy;
+    // this.fireProjectile();
     this.ctx.drawImage(this.playerImg, this.x, this.y, this.height, this.width);
-    requestAnimationFrame(this.draw); 
+    // requestAnimationFrame(this.draw); 
   }
 }
 
