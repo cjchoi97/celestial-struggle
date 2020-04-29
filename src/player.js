@@ -9,20 +9,29 @@ class Player {
     this.x = this.ctx.canvas.width/2.1;
     this.y = 500;
     this.draw = this.draw.bind(this);
+    this.dx = 0;
+    this.dy = 0;
   }
 
   moveHorizontally(speed) {
-    this.x += speed
+    // console.log(this.x);
+    this.dx = speed;
   }
 
   moveVertically(speed) {
-    this.y += speed
+    this.dy = speed;
+  }
+
+  fireMissile() {
+
   }
 
   draw() {
     // debugger
+    this.x += this.dx;
+    this.y += this.dy;
     this.ctx.drawImage(this.playerImg, this.x, this.y, this.height, this.width);
-    window.requestAnimationFrame(this.draw); 
+    requestAnimationFrame(this.draw); 
   }
 }
 

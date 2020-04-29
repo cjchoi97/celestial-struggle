@@ -1,8 +1,9 @@
 import "./styles/index.scss";
 import Game from './game';
-import { setupControls } from './controls';
+import Controls from './controls';
 
 export let game = null;
+// new Controls();
 // setupControls();
 
 document.addEventListener("DOMContentLoaded", () => {

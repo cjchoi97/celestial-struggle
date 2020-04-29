@@ -1,5 +1,6 @@
 import Player from './player';
 import Background from './background';
+import Controls from './controls';
 
 class Game {
   constructor(canvas, ctx) {
@@ -11,21 +12,28 @@ class Game {
 
     this.draw = this.draw.bind(this);
 
+    this.setupControls();
+
   }
 
   renderBackground() {
     this.background.draw();
   }
 
+  setupControls() {
+    new Controls(this.ctx);
+  }
+
   draw() {
-    this.renderBackground();
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.renderBackground();
     this.player.draw();
     // window.requestAnimationFrame(this.draw); 
   }
 
   start() {
-    setInterval(this.draw(), 10);
+    requestAnimationFrame(this.draw)
+    // setInterval(this.draw(), 10);
   }
 }
 
