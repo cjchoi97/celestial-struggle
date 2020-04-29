@@ -14,7 +14,7 @@ class Background {
     this.ctx.drawImage(this.backgroundImg, 0, this.y);
     this.ctx.drawImage(this.backgroundImg, 0, this.y - 1600);
     if (this.y === 1600) this.y = 0;
-    window.requestAnimationFrame(this.draw); 
+    // requestAnimationFrame(this.draw); 
   }
 }
 
