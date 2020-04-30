@@ -12,6 +12,7 @@ class Projectile {
     this.dy = props.dy;
     this.ctx = props.ctx;
     this.draw = this.draw.bind(this);
+    this.detectHit = this.detectHit.bind(this);
     this.type = props.type;
   }
 
@@ -28,9 +29,10 @@ class Projectile {
             this.hitbox[1] <= enemyHitBox[1] &&
             !(this.hitbox[2] < enemyHitBox[3])
           ) {
-          console.log("hit");
+          console.log("enemy hit by player bullet");
           clearInterval(game.enemyShot);
           delete game.enemy;
+          delete this;
           //increment score
         }
       }
@@ -45,7 +47,8 @@ class Projectile {
             !(this.hitbox[3] > enemyHitBox[2])
           ) {
           clearInterval(game.playerShot);
-          console.log("player hit");
+          delete this;
+          console.log("player hit by enemy bullet");
           // delete game.player;
         }
       }

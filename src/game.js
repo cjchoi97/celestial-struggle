@@ -15,6 +15,7 @@ class Game {
     this.draw = this.draw.bind(this);
 
     this.setupControls();
+    // this.startTime = null;
 
   }
 
@@ -26,7 +27,10 @@ class Game {
     new Controls(this.ctx);
   }
 
-  draw() {
+  draw(timestamp) {
+    // console.log(timestamp);
+    // this.startTime = this.startTime || timestamp;
+    // console.log(timestamp - this.startTime);
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.renderBackground();
     this.player.draw();
@@ -38,7 +42,7 @@ class Game {
   }
 
   start() {
-    requestAnimationFrame(this.draw)
+    requestAnimationFrame(this.draw);
     this.playerShot = setInterval(this.player.fireProjectile, 1000/1);
     if (this.enemy) {
       this.enemyShot = setInterval(this.enemy.fireProjectile, 1000/1);
