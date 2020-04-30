@@ -15,7 +15,6 @@ class Player {
     this.dy = 0;
 
     this.fireProjectile = this.fireProjectile.bind(this);
-    // this.fire = this.fire.bind(this);
   }
 
   hitBox() {
@@ -32,7 +31,6 @@ class Player {
   }
 
   fireProjectile() {
-    // console.log("im here");
     const projectile = new Projectile({
       x: this.x + 21,
       y: this.y,
