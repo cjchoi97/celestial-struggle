@@ -36,7 +36,10 @@ class Game {
   removeEnemy(id) {
     for (let i = 0; i < this.enemies.length; i++) {
       if (this.enemies[i] !== undefined) {
-        if (this.enemies[i].id === id) delete this.enemies[i];
+        if (this.enemies[i].id === id) {
+          clearInterval(this.enemies[i].firingRate);
+          delete this.enemies[i];
+        }
       }
     }
   }
@@ -72,7 +75,7 @@ class Game {
 
   start() {
     requestAnimationFrame(this.draw);
-    // this.playerShot = setInterval(this.player.fireProjectile, 1000/1);
+    this.playerShot = setInterval(this.player.fireProjectile, 1000/1);
     if (this.enemies.length > 0) {
       // this.enemies.forEach(enemy => {
         // console.log(enemy.y);
