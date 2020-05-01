@@ -2,6 +2,7 @@ import Player from './player';
 import Background from './background';
 import Controls from './controls';
 import Enemy from './enemy';
+import level1 from './scripts/levels/level1';
 
 class Game {
   constructor(canvas, ctx) {
@@ -15,8 +16,17 @@ class Game {
     this.draw = this.draw.bind(this);
 
     this.setupControls();
-    // this.startTime = null;
 
+    this.levels = [level1]
+    this.levelidx = 0;
+    // this.startTime = null;
+    this.setupLevel();
+
+  }
+
+  setupLevel() {
+    this.enemies = this.levels[this.levelidx]().enemies;
+    this.levelidx++;
   }
 
   renderBackground() {
