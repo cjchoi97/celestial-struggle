@@ -11,7 +11,7 @@ class Game {
     this.background = new Background(this.ctx);
     // this.player = null;
     this.player = new Player(this.ctx);
-    this.enemy = new Enemy(this.ctx);
+    // this.enemy = new Enemy(this.ctx);
 
     this.draw = this.draw.bind(this);
 
@@ -24,8 +24,16 @@ class Game {
 
   }
 
+  removeEnemy(id) {
+    for (let i = 0; i < this.enemies.length; i++) {
+      if (this.enemies[i] !== undefined) {
+        if (this.enemies[i].id === id) delete this.enemies[i];
+      }
+    }
+  }
+
   setupLevel() {
-    this.enemies = this.levels[this.levelidx]().enemies;
+    this.enemies = this.levels[this.levelidx](this.ctx).enemies;
     this.levelidx++;
   }
 
@@ -44,20 +52,26 @@ class Game {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.renderBackground();
     this.player.draw();
-    if (this.enemy) {
-      this.enemy.draw();
-      // console.log(this.enemy.y);
-    }
+    this.enemies.forEach( enemy => {
+      if (enemy) {
+        enemy.draw();
+      }
+    })
     requestAnimationFrame(this.draw); 
   }
 
   start() {
     requestAnimationFrame(this.draw);
     this.playerShot = setInterval(this.player.fireProjectile, 1000/1);
-    if (this.enemy) {
-      this.enemyShot = setInterval(this.enemy.fireProjectile, 1000/1);
+    if (this.enemies.length > 0) {
+      this.enemies.forEach(enemy => {
+        console.log(enemy.y);
+        if (enemy.y === 0) {
+          this.enemyShot = setInterval(enemy.fireProjectile, 1000/1);
+        }
+      })
     }
-  // setInterval(this.draw(), 10);
+      // setInterval(this.draw(), 10);
   }
 }
 

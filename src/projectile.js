@@ -22,18 +22,22 @@ class Projectile {
     
     if (this.type === "player") {
       // console.log("player");
-      if (game.enemy) {
-        const enemyHitBox = game.enemy.hitBox();
-        if (this.y < enemyHitBox[2] && 
-            this.x >= enemyHitBox[0] &&
-            this.hitbox[1] <= enemyHitBox[1] &&
-            !(this.hitbox[2] < enemyHitBox[3])
-          ) {
-          console.log("enemy hit by player bullet");
-          clearInterval(game.enemyShot);
-          delete game.enemy;
-          delete this;
-          //increment score
+      if (game.enemies) {
+        for (let i = 0; i < game.enemies.length; i++) {
+          if (game.enemies[i]) {
+            const enemyHitBox = game.enemies[i].hitBox();
+            if (this.y < enemyHitBox[2] && 
+                this.x >= enemyHitBox[0] &&
+                this.hitbox[1] <= enemyHitBox[1] &&
+                !(this.hitbox[2] < enemyHitBox[3])
+              ) {
+              console.log("enemy hit by player bullet");
+              clearInterval(game.enemyShot);
+              delete game.enemies[i];
+              delete this;
+              //increment score
+            }
+          }
         }
       }
     } else if (this.type === "enemy") {
