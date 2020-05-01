@@ -14,7 +14,12 @@ class Projectile {
     this.draw = this.draw.bind(this);
     this.detectHit = this.detectHit.bind(this);
     this.type = props.type;
+    // this.getY = this.getY.bind(this);
   }
+
+  // getY() {
+  //   return this.y;
+  // }
 
 
   detectHit() {
@@ -60,12 +65,9 @@ class Projectile {
     this.y += this.dy;
     this.ctx.drawImage(this.projectileImg, this.x, this.y, this.width, this.height);
     this.detectHit();
-    if (this.y === 0) {
-      delete this;
-    } else if (this.y === 550) {
-      delete this;
-    }
     // setTimeout(() => requestAnimationFrame(this.draw), 1000/20);
+    // console.log("fire");
+    if (this.y > 550) return;
     requestAnimationFrame(this.draw);
   }
 }

@@ -20,7 +20,10 @@ class Enemy {
     this.fireProjectile = this.fireProjectile.bind(this);
     this.selfTimer = this.selfTimer.bind(this);
 
-    const timerInterval = setInterval(this.selfTimer, 1000/1)
+    // if (this.y > 0 && this.y < 1) {
+    //   console.log("here");
+    //   this.timerInterval = setInterval(this.selfTimer, 1000/1);
+    // } 
   }
 
   selfTimer() {
@@ -54,9 +57,11 @@ class Enemy {
       )
     ) {
       clearInterval(game.playerShot);
-      clearInterval(game.enemyShot);
+      clearInterval(this.firingRate);
+      // clearInterval(game.enemyShot);
 
       console.log("player and enemy collide");
+
       game.removeEnemy(this.id);
       /* kill player too */
     }
@@ -64,7 +69,7 @@ class Enemy {
 
   fireProjectile() {
     // debugger
-    const projectile = new Projectile({
+    this.projectile = new Projectile({
       x: this.x + 30,
       y: this.y + 70,
       dy: 5,
@@ -72,29 +77,36 @@ class Enemy {
       img: './src/assets/enemy-projectile.png',
       type: "enemy"
     })
-    projectile.draw();
+    // console.log("fired");
+    this.projectile.draw();  
+    // console.log(this.projectile.y);
   }
   
-  draw(timestamp) {
+  draw() {
     this.y += this.dy;
-    this.startTime = this.startTime || timestamp;
-    const seconds = ((timestamp - this.startTime) / 1000).toFixed(2);
-    // console.log(seconds);
+    // this.startTime = this.startTime || timestamp;
+    // const seconds = ((timestamp - this.startTime) / 1000).toFixed(2);
+    // this.time += .01;
+    // console.log(this.time);
     
-    if (seconds % 1.00 === 0) {
-      this.time += .1;
-      // console.log(this.time);
-    }
+    // if (seconds % 1.00 === 0) {
+    //   // this.time += 1;
+    //   console.log("this.time");
+    // }
     this.ctx.drawImage(this.enemyImg, this.x, this.y, this.width, this.height);
     this.detectCollision();
     if (this.y > 0 && this.y < 1) {
-      this.time = 0;
-    }
-    if (this.y > 0) {
-      this.fireProjectile();
       // this.time = 0;
+      this.firingRate = setInterval(this.fireProjectile, 1000 / 1);
     }
-    if (this.y === 550) delete this;
+    // if (this.y > 0 && this.time % 1.00 === 0) {
+    //   // this.fireProjectile();
+    //   // this.time = 0;
+    // }
+    if (this.y > 550) {
+      clearInterval(this.firingRate);
+      delete this.projectile;
+    }
   }
 }
 

@@ -72,7 +72,7 @@ class Game {
 
   start() {
     requestAnimationFrame(this.draw);
-    this.playerShot = setInterval(this.player.fireProjectile, 1000/1);
+    // this.playerShot = setInterval(this.player.fireProjectile, 1000/1);
     if (this.enemies.length > 0) {
       // this.enemies.forEach(enemy => {
         // console.log(enemy.y);
