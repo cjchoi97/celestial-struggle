@@ -5,14 +5,17 @@ class Enemy {
   constructor(ctx, props) {
     this.ctx = ctx;
     this.enemyImg = new Image();
-    this.enemyImg.src = "./src/assets/enemy-ship.png";
-    this.height = 70;
-    this.width = 70;
+    this.enemyImg.src = props.img;
+
+    this.id = props.id;
+    this.height = props.height;
+    this.width = props.width;
+    this.x = props.x;
+    this.y = props.y;
+    this.dy = props.dy;
+
     this.enemyImg.onload = () => this.draw();
-    this.x = this.ctx.canvas.width / 2.2;
-    this.y = -70;
     this.draw = this.draw.bind(this);
-    this.dy = 1;
     this.fireProjectile = this.fireProjectile.bind(this);
   }
 
@@ -46,7 +49,7 @@ class Enemy {
       clearInterval(game.enemyShot);
 
       console.log("player and enemy collide");
-      delete game.enemy;
+      game.removeEnemy(this.id);
       /* kill player too */
     }
   }
@@ -68,6 +71,7 @@ class Enemy {
   draw() {
     this.y += this.dy;
     this.ctx.drawImage(this.enemyImg, this.x, this.y, this.width, this.height);
+    // console.log(this.y);
     this.detectCollision();
     // console.log("here");
     if (this.y === 550) delete this;
