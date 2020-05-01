@@ -9,7 +9,7 @@ class Projectile {
     this.width = 10;
     this.height = 20;
     this.dx = 0;
-    this.dy = props.dy;
+    this.dy = props.dy; // speed of projectile
     this.ctx = props.ctx;
     this.draw = this.draw.bind(this);
     this.detectHit = this.detectHit.bind(this);
@@ -41,8 +41,6 @@ class Projectile {
         }
       }
     } else if (this.type === "enemy") {
-      // console.log("enemy");
-      // debugger
       if (game.player) {
         const enemyHitBox = game.player.hitBox();
         if (this.hitbox[2] > enemyHitBox[3] &&
@@ -53,22 +51,17 @@ class Projectile {
           clearInterval(game.playerShot);
           delete this;
           console.log("player hit by enemy bullet");
-          // delete game.player;
         }
       }
     }
   } 
 
   draw() {
-    // console.log("fired");
-    // debugger
     this.y += this.dy;
-    // console.log(game.enemy.y);
     this.ctx.drawImage(this.projectileImg, this.x, this.y, this.width, this.height);
     this.detectHit();
     if (this.y === 0) {
       delete this;
-      // console.log(this.y);
     } else if (this.y === 550) {
       delete this;
     }

@@ -4,6 +4,7 @@ import { game } from "./index";
 class Enemy {
   constructor(ctx, props) {
     this.ctx = ctx;
+    this.time = 0;
     this.enemyImg = new Image();
     this.enemyImg.src = props.img;
 
@@ -12,11 +13,18 @@ class Enemy {
     this.width = props.width;
     this.x = props.x;
     this.y = props.y;
-    this.dy = props.dy;
+    this.dy = props.dy; // speed of descent
 
     this.enemyImg.onload = () => this.draw();
     this.draw = this.draw.bind(this);
     this.fireProjectile = this.fireProjectile.bind(this);
+    this.selfTimer = this.selfTimer.bind(this);
+
+    const timerInterval = setInterval(this.selfTimer, 1000/1)
+  }
+
+  selfTimer() {
+    this.time++;
   }
 
   hitBox() {
@@ -64,16 +72,28 @@ class Enemy {
       img: './src/assets/enemy-projectile.png',
       type: "enemy"
     })
-
     projectile.draw();
   }
-
-  draw() {
+  
+  draw(timestamp) {
     this.y += this.dy;
+    this.startTime = this.startTime || timestamp;
+    const seconds = ((timestamp - this.startTime) / 1000).toFixed(2);
+    // console.log(seconds);
+    
+    if (seconds % 1.00 === 0) {
+      this.time += .1;
+      // console.log(this.time);
+    }
     this.ctx.drawImage(this.enemyImg, this.x, this.y, this.width, this.height);
-    // console.log(this.y);
     this.detectCollision();
-    // console.log("here");
+    if (this.y > 0 && this.y < 1) {
+      this.time = 0;
+    }
+    if (this.y > 0) {
+      this.fireProjectile();
+      // this.time = 0;
+    }
     if (this.y === 550) delete this;
   }
 }
