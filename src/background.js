@@ -2,7 +2,9 @@ class Background {
   constructor(ctx) {
     this.ctx = ctx;
     this.backgroundImg = new Image();
-    this.backgroundImg.src = './src/assets/space-background.jpg';
+    this.backgroundImg.src = './src/assets/space-background.png';
+    this.canvasHeight = ctx.canvas.height;
+    this.canvasWidth = ctx.canvas.width;
     this.y = 0;
 
     this.draw = this.draw.bind(this);
@@ -12,8 +14,8 @@ class Background {
     // debugger
     this.y += 0.5;
     this.ctx.drawImage(this.backgroundImg, 0, this.y);
-    this.ctx.drawImage(this.backgroundImg, 0, this.y - 1600);
-    if (this.y === 1600) this.y = 0;
+    this.ctx.drawImage(this.backgroundImg, 0, this.y - this.canvasHeight);
+    if (this.y === this.canvasHeight) this.y = 0;
     // requestAnimationFrame(this.draw); 
   }
 }
