@@ -1,1 +1,37 @@
+.celestial-canvas {
+  text-align: center;
+}
 
+h1 {
+  color: #13AABF;
+  width: auto;
+  text-align: center;
+  text-shadow: 0 0 4px #13AABF;
+  font-size: 40px;
+}
+
+html {
+background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 63%, rgba(30,36,92,1) 100%);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.links a {
+  color: white;
+  font-size: 40px;
+}
+
+.links a i {
+  transition-duration: 0.3s;
+  text-shadow: 0 0 4px #13AABF;
+}
+
+.links a i:hover {
+  color: #13AABF;
+  transition-duration: 0.3s;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}

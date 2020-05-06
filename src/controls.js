@@ -6,8 +6,8 @@ class Controls {
     this.ctx = ctx;
     this.keyDownHandler = this.keyDownHandler.bind(this);
     this.keyUpHandler = this.keyUpHandler.bind(this);
-    this.ctx.canvas.addEventListener("keydown",this.keyDownHandler);
-    this.ctx.canvas.addEventListener("keyup", this.keyUpHandler);
+    window.addEventListener("keydown",this.keyDownHandler);
+    window.addEventListener("keyup", this.keyUpHandler);
     // this.keydown = null;
   }
 
@@ -16,13 +16,13 @@ class Controls {
     // console.log("pressed");
     // this.keydown = true;
     if (game.player) {
-      if (e.key === "ArrowRight") {
+      if (e.key === "d") {
         game.player.moveHorizontally(5);
-      } else if (e.key === "ArrowLeft") {
+      } else if (e.key === "a") {
         game.player.moveHorizontally(-5);
-      } else if (e.key === "ArrowUp") {
+      } else if (e.key === "w") {
         game.player.moveVertically(-5);
-      } else if (e.key === "ArrowDown") {
+      } else if (e.key === "s") {
         game.player.moveVertically(5);
       } 
     }
@@ -31,13 +31,13 @@ class Controls {
   keyUpHandler(e) {
     clearInterval(this.keydown);
     if (game.player) {
-      if (e.key == "ArrowRight") {
+      if (e.key == "d") {
         game.player.moveHorizontally(0);
-      } else if (e.key == "ArrowLeft") {
+      } else if (e.key == "a") {
         game.player.moveHorizontally(0);
-      } else if (e.key === "ArrowUp") {
+      } else if (e.key === "w") {
         game.player.moveVertically(0);
-      } else if (e.key === "ArrowDown") {
+      } else if (e.key === "s") {
         game.player.moveVertically(0);
       } 
     }
