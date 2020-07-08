@@ -72,7 +72,7 @@ class Enemy {
     this.projectile = new Projectile({
       x: this.x + 30,
       y: this.y + 70,
-      dy: 5,
+      dy: 2,
       ctx: this.ctx,
       img: './src/assets/enemy-projectile.png',
       type: "enemy"
@@ -97,7 +97,7 @@ class Enemy {
     this.detectCollision();
     if (this.y > 0 && this.y < 1) {
       // this.time = 0;
-      this.firingRate = setInterval(this.fireProjectile, 1000 / 1);
+      this.firingRate = setInterval(this.fireProjectile, 2000 / 1);
     }
     // if (this.y > 0 && this.time % 1.00 === 0) {
     //   // this.fireProjectile();
@@ -106,6 +106,7 @@ class Enemy {
     if (this.y > 550) {
       clearInterval(this.firingRate);
       delete this.projectile;
+      game.removeEnemy(this.id)
     }
   }
 }

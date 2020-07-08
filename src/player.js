@@ -34,7 +34,7 @@ class Player {
     const projectile = new Projectile({
       x: this.x + 21,
       y: this.y,
-      dy: -1,
+      dy: -5,
       ctx: this.ctx,
       img: "./src/assets/basic-projectile.png",
       type: "player",

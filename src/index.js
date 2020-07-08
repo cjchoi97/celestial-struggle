@@ -16,5 +16,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.closePath();
 
   game = new Game(canvas, ctx);
-  game.start();
 })

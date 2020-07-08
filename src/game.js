@@ -20,6 +20,7 @@ class Game {
     this.levels = [level1]
     this.levelidx = 0;
     this.startTime = null;
+    this.gameOnGoing = false;
     this.setupLevel();
 
   }
@@ -30,6 +31,7 @@ class Game {
         return true;
       }
     }
+
     return false;
   }
 
@@ -70,20 +72,29 @@ class Game {
         this.enemies[i].draw(timestamp);
       }
     }
+
+    if (!this.enemiesLeft()) {
+      this.gameOnGoing = false;
+      return
+    }
     requestAnimationFrame(this.draw); 
   }
 
   start() {
+    this.gameOnGoing = true;
     requestAnimationFrame(this.draw);
-    this.playerShot = setInterval(this.player.fireProjectile, 1000/1);
-    if (this.enemies.length > 0) {
-      // this.enemies.forEach(enemy => {
-        // console.log(enemy.y);
-        // if (enemy.y === 0) {
-          // this.enemyShot = setInterval(enemy.fireProjectile, 1000/1);
-        // }
-      // })
-    }
+    this.playerShot = setInterval(this.player.fireProjectile, 300/1);
+    // if (!this.enemiesLeft()) {
+
+    //   console.log("Game Over");
+    //   return;
+    //   // this.enemies.forEach(enemy => {
+    //     // console.log(enemy.y);
+    //     // if (enemy.y === 0) {
+    //       // this.enemyShot = setInterval(enemy.fireProjectile, 1000/1);
+    //     // }
+    //   // })
+    // }
       // setInterval(this.draw(), 10);
   }
 }

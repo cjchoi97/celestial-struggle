@@ -24,7 +24,10 @@ class Controls {
         game.player.moveVertically(-5);
       } else if (e.key === "s") {
         game.player.moveVertically(5);
-      } 
+      } else if (e.key === "p" && game.gameOnGoing === false) {
+        game.start();
+      }
+
     }
   }
 
