@@ -1,8 +1,8 @@
-import Player from './player';
-import Background from './background';
-import Controls from './controls';
-import Enemy from './enemy';
-import level1 from './scripts/levels/level1';
+import Player from "./player";
+import Background from "./background";
+import Controls from "./controls";
+import Enemy from "./enemy";
+import level1 from "./scripts/levels/level1";
 
 class Game {
   constructor(canvas, ctx) {
@@ -12,17 +12,33 @@ class Game {
     // this.player = null;
     this.player = new Player(this.ctx);
     // this.enemy = new Enemy(this.ctx);
-
+    this.playerProjectiles = [];
     this.draw = this.draw.bind(this);
 
     this.setupControls();
 
-    this.levels = [level1]
+    this.levels = [level1];
     this.levelidx = 0;
-    this.startTime = null;
+    this.startTime = 0;
     this.gameOnGoing = false;
     this.setupLevel();
+  }
 
+  reset() {
+    this.background = new Background(this.ctx);
+    // this.player = null;
+    this.player = new Player(this.ctx);
+    // this.enemy = new Enemy(this.ctx);
+    this.playerProjectiles = [];
+    this.draw = this.draw.bind(this);
+
+    this.setupControls();
+
+    this.levels = [level1];
+    this.levelidx = 0;
+    this.startTime = 0;
+    this.gameOnGoing = false;
+    this.setupLevel();
   }
 
   enemiesLeft() {
@@ -58,11 +74,18 @@ class Game {
   setupControls() {
     new Controls(this.ctx);
   }
-
+  addProjectile(newTime) {
+    const newPlayerShot = this.player.fireProjectile();
+    this.playerProjectiles.push(newPlayerShot);
+    return newTime;
+  }
   draw(timestamp) {
     // console.log(timestamp);
-    // this.startTime = this.startTime || timestamp;
-    // const seconds = (timestamp - this.startTime) / 1000;
+    this.startTime =
+      timestamp - this.startTime > 300
+        ? this.addProjectile(timestamp)
+        : this.startTime;
+    const miliseconds = timestamp - this.startTime;
     // console.log(seconds.toFixed(2));
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.renderBackground();
@@ -73,17 +96,18 @@ class Game {
       }
     }
 
+    this.playerProjectiles.map((projectile) => projectile.draw());
     if (!this.enemiesLeft()) {
       this.gameOnGoing = false;
-      return
+      return;
     }
-    requestAnimationFrame(this.draw); 
+    this.animationLoop = requestAnimationFrame(this.draw);
   }
 
   start() {
     this.gameOnGoing = true;
-    requestAnimationFrame(this.draw);
-    this.playerShot = setInterval(this.player.fireProjectile, 300/1);
+    this.animationLoop = requestAnimationFrame(this.draw);
+
     // if (!this.enemiesLeft()) {
 
     //   console.log("Game Over");
@@ -95,7 +119,13 @@ class Game {
     //     // }
     //   // })
     // }
-      // setInterval(this.draw(), 10);
+    // setInterval(this.draw(), 10);
+  }
+
+  pause() {
+    if (this.animationLoop) {
+      cancelAnimationFrame(this.animationLoop);
+    }
   }
 }
 

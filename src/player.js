@@ -41,7 +41,8 @@ class Player {
     });
     // console.log("MADE PROJECTILE")
 
-    projectile.draw();
+    // projectile.draw();
+    return projectile;
   }
 
   draw() {
