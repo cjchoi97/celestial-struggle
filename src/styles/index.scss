@@ -43,3 +43,21 @@ html {
 .links {
   display: flex;
 }
+
+p {
+  color: white;
+  text-shadow: 0 0 4px #13AABF;
+  text-align: center;
+}
+
+.description {
+  width: 500px;
+  margin: 40px auto;
+}
+
+.controls {
+  position: absolute;
+  left: 50%;
+  margin-left: 300px;
+  top: 30%;
+}
