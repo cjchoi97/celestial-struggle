@@ -1,6 +1,6 @@
 import "./styles/index.scss";
-import Game from './game';
-import Controls from './controls';
+import Game from "./game";
+import Controls from "./controls";
 
 export let game = null;
 // new Controls();
@@ -8,7 +8,7 @@ export let game = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d");
   // ctx.beginPath();
   // ctx.rect(160, 10, 100, 40);
   // ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
@@ -16,5 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.closePath();
 
   game = new Game(canvas, ctx);
-  game.start();
-})
+  window.game = game;
+  document.querySelector("h1").onclick = (e) => {
+    game.pause();
+    game.reset();
+    game.start();
+    window.game = game;
+  };
+});

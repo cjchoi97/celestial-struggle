@@ -56,8 +56,8 @@ class Enemy {
         ((eLeft > left && eLeft < right) || (eRight < right && eRight > left))
       )
     ) {
-      clearInterval(game.playerShot);
-      clearInterval(this.firingRate);
+      // clearInterval(game.playerShot);
+      // clearInterval(this.firingRate);
       // clearInterval(game.enemyShot);
 
       console.log("player and enemy collide");
@@ -69,17 +69,18 @@ class Enemy {
 
   fireProjectile() {
     // debugger
-    this.projectile = new Projectile({
+    const projectile = new Projectile({
       x: this.x + 30,
       y: this.y + 70,
-      dy: 5,
+      dy: 2,
       ctx: this.ctx,
       img: './src/assets/enemy-projectile.png',
       type: "enemy"
     })
-    // console.log("fired");
-    this.projectile.draw();  
-    // console.log(this.projectile.y);
+    // this.projectile.draw();  
+    // console.log("we are here");
+
+    return projectile;
   }
   
   draw() {
@@ -95,17 +96,18 @@ class Enemy {
     // }
     this.ctx.drawImage(this.enemyImg, this.x, this.y, this.width, this.height);
     this.detectCollision();
-    if (this.y > 0 && this.y < 1) {
-      // this.time = 0;
-      this.firingRate = setInterval(this.fireProjectile, 1000 / 1);
-    }
+    // if (this.y > 0 && this.y < 1) {
+    //   // this.time = 0;
+    //   this.firingRate = setInterval(this.fireProjectile, 2000 / 1);
+    // }
     // if (this.y > 0 && this.time % 1.00 === 0) {
     //   // this.fireProjectile();
     //   // this.time = 0;
     // }
     if (this.y > 550) {
-      clearInterval(this.firingRate);
-      delete this.projectile;
+      // clearInterval(this.firingRate);
+      // delete this.projectile;
+      game.removeEnemy(this.id)
     }
   }
 }

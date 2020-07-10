@@ -1,8 +1,8 @@
-import Player from './player';
-import Background from './background';
-import Controls from './controls';
-import Enemy from './enemy';
-import level1 from './scripts/levels/level1';
+import Player from "./player";
+import Background from "./background";
+import Controls from "./controls";
+import Enemy from "./enemy";
+import level1 from "./scripts/levels/level1";
 
 class Game {
   constructor(canvas, ctx) {
@@ -12,16 +12,35 @@ class Game {
     // this.player = null;
     this.player = new Player(this.ctx);
     // this.enemy = new Enemy(this.ctx);
-
+    this.playerProjectiles = [];
+    this.enemyProjectiles = [];
     this.draw = this.draw.bind(this);
 
     this.setupControls();
 
-    this.levels = [level1]
+    this.levels = [level1];
     this.levelidx = 0;
-    this.startTime = null;
+    this.startTime = 0;
+    this.enemyTime = 0;
+    this.gameOnGoing = false;
     this.setupLevel();
+  }
 
+  reset() {
+    this.background = new Background(this.ctx);
+    // this.player = null;
+    this.player = new Player(this.ctx);
+    // this.enemy = new Enemy(this.ctx);
+    this.playerProjectiles = [];
+    this.draw = this.draw.bind(this);
+
+    this.setupControls();
+
+    this.levels = [level1];
+    this.levelidx = 0;
+    this.startTime = 0;
+    this.gameOnGoing = false;
+    this.setupLevel();
   }
 
   enemiesLeft() {
@@ -30,6 +49,7 @@ class Game {
         return true;
       }
     }
+
     return false;
   }
 
@@ -57,34 +77,79 @@ class Game {
     new Controls(this.ctx);
   }
 
+  addProjectile(newTime) {
+    const newPlayerShot = this.player.fireProjectile();
+    this.playerProjectiles.push(newPlayerShot);
+    return newTime;
+  }
+
+  addEnemyProjectile(newTime, i) {
+    const newEnemyShot = this.enemies[i].fireProjectile();
+    this.enemyProjectiles.push(newEnemyShot);
+    return newTime;
+  }
+
   draw(timestamp) {
-    // console.log(timestamp);
-    // this.startTime = this.startTime || timestamp;
-    // const seconds = (timestamp - this.startTime) / 1000;
-    // console.log(seconds.toFixed(2));
+
+    //====== Player firing Rate ======//
+    this.startTime =
+      timestamp - this.startTime > 300 //every 300 miliseconds
+        ? this.addProjectile(timestamp)
+        : this.startTime;
+
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.renderBackground();
-    this.player.draw();
+    this.player.draw(); //draw the player on every frame
+
+    //====== Drawing Enemies ======//
     for (let i = 0; i < this.enemies.length; i++) {
-      if (this.enemies[i]) {
+      if (this.enemies[i] !== undefined) {
         this.enemies[i].draw(timestamp);
+        if (this.enemies[i].y > 0 ) {
+          //====== Enemy Projectiles ======//
+          this.enemies[i].time = 
+            timestamp - this.enemies[i].time > 3000 //every 2 seconds
+            ? this.addEnemyProjectile(timestamp, i) 
+            : this.enemies[i].time;
+        }
       }
     }
-    requestAnimationFrame(this.draw); 
+
+    //====== Drawing Projectiles ======//
+    this.playerProjectiles.map((projectile) => projectile.draw());
+    this.enemyProjectiles.map((projectile) => projectile.draw());
+
+    //====== Checking for remaining enemies ======//
+    if (!this.enemiesLeft()) {
+      this.gameOnGoing = false;
+      return;
+    }
+
+    this.animationLoop = requestAnimationFrame(this.draw);
   }
 
   start() {
-    requestAnimationFrame(this.draw);
-    this.playerShot = setInterval(this.player.fireProjectile, 1000/1);
-    if (this.enemies.length > 0) {
-      // this.enemies.forEach(enemy => {
-        // console.log(enemy.y);
-        // if (enemy.y === 0) {
-          // this.enemyShot = setInterval(enemy.fireProjectile, 1000/1);
-        // }
-      // })
+    this.gameOnGoing = true;
+    this.animationLoop = requestAnimationFrame(this.draw);
+
+    // if (!this.enemiesLeft()) {
+
+    //   console.log("Game Over");
+    //   return;
+    //   // this.enemies.forEach(enemy => {
+    //     // console.log(enemy.y);
+    //     // if (enemy.y === 0) {
+    //       // this.enemyShot = setInterval(enemy.fireProjectile, 1000/1);
+    //     // }
+    //   // })
+    // }
+    // setInterval(this.draw(), 10);
+  }
+
+  pause() {
+    if (this.animationLoop) {
+      cancelAnimationFrame(this.animationLoop);
     }
-      // setInterval(this.draw(), 10);
   }
 }
 

@@ -7,14 +7,14 @@ function level1(ctx) {
   const height = -100;
 
   const generateHorizontal = () => {
-    return Math.floor(Math.random() * Math.floor(width));
+    return Math.floor(Math.random() * Math.floor(width - 70));
   }
 
   const generateVertical = () => {
-    return Math.random() * ((height-500) - height) + height;
+    return Math.random() * ((height-300) - height) + height;
   }
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 1; i++) {
     const enemy = new Enemy(ctx, {
       img: "./src/assets/enemy-ship.png",
       height: 70,

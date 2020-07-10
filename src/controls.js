@@ -1,4 +1,4 @@
-import { game } from './index';
+import { game } from "./index";
 
 class Controls {
   constructor(ctx) {
@@ -6,7 +6,7 @@ class Controls {
     this.ctx = ctx;
     this.keyDownHandler = this.keyDownHandler.bind(this);
     this.keyUpHandler = this.keyUpHandler.bind(this);
-    window.addEventListener("keydown",this.keyDownHandler);
+    window.addEventListener("keydown", this.keyDownHandler);
     window.addEventListener("keyup", this.keyUpHandler);
     // this.keydown = null;
   }
@@ -24,7 +24,9 @@ class Controls {
         game.player.moveVertically(-5);
       } else if (e.key === "s") {
         game.player.moveVertically(5);
-      } 
+      } else if (e.key === "p" && game.gameOnGoing === false) {
+        game.start();
+      }
     }
   }
 
@@ -39,10 +41,9 @@ class Controls {
         game.player.moveVertically(0);
       } else if (e.key === "s") {
         game.player.moveVertically(0);
-      } 
+      }
     }
   }
-
 }
 
 export default Controls;

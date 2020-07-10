@@ -1,5 +1,14 @@
 .celestial-canvas {
   text-align: center;
+  position: relative;
+  
+  .links {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    flex-direction: column;
+    margin-left: -300px;
+  }
 }
 
 h1 {
@@ -11,8 +20,8 @@ h1 {
 }
 
 html {
-background: rgb(0,0,0);
-background: radial-gradient(circle, rgba(0,0,0,1) 63%, rgba(30,36,92,1) 100%);
+  background: rgb(0,0,0);
+  background: radial-gradient(circle, rgba(0,0,0,1) 63%, rgba(30,36,92,1) 100%);
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -33,5 +42,4 @@ background: radial-gradient(circle, rgba(0,0,0,1) 63%, rgba(30,36,92,1) 100%);
 
 .links {
   display: flex;
-  flex-direction: column;
 }
