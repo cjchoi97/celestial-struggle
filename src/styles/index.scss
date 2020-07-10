@@ -1,5 +1,14 @@
 .celestial-canvas {
   text-align: center;
+  position: relative;
+  
+  .links {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    flex-direction: column;
+    margin-left: -300px;
+  }
 }
 
 h1 {
@@ -33,5 +42,4 @@ html {
 
 .links {
   display: flex;
-  flex-direction: column;
 }

@@ -14,7 +14,7 @@ function level1(ctx) {
     return Math.random() * ((height-300) - height) + height;
   }
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 1; i++) {
     const enemy = new Enemy(ctx, {
       img: "./src/assets/enemy-ship.png",
       height: 70,

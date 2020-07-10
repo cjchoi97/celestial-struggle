@@ -90,7 +90,6 @@ class Game {
   }
 
   draw(timestamp) {
-    // console.log(timestamp);
 
     //====== Player firing Rate ======//
     this.startTime =
@@ -98,8 +97,6 @@ class Game {
         ? this.addProjectile(timestamp)
         : this.startTime;
 
-    // const miliseconds = timestamp - this.startTime;
-    // console.log(seconds.toFixed(2));
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.renderBackground();
     this.player.draw(); //draw the player on every frame
@@ -111,7 +108,7 @@ class Game {
         if (this.enemies[i].y > 0 ) {
           //====== Enemy Projectiles ======//
           this.enemies[i].time = 
-            timestamp - this.enemies[i].time > 2000 //every 2 seconds
+            timestamp - this.enemies[i].time > 3000 //every 2 seconds
             ? this.addEnemyProjectile(timestamp, i) 
             : this.enemies[i].time;
         }

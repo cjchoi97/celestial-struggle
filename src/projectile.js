@@ -49,7 +49,8 @@ class Projectile {
           this.hitbox[1] <= enemyHitBox[1] &&
           !(this.hitbox[3] > enemyHitBox[2])
         ) {
-          clearInterval(game.playerShot);
+          // clearInterval(game.playerShot);
+          game.playerProjectiles = [];
           delete this;
           console.log("player hit by enemy bullet");
         }

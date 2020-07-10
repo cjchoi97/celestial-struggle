@@ -19,7 +19,6 @@ class Enemy {
     this.draw = this.draw.bind(this);
     this.fireProjectile = this.fireProjectile.bind(this);
     this.selfTimer = this.selfTimer.bind(this);
-    this.time = 0
 
     // if (this.y > 0 && this.y < 1) {
     //   console.log("here");
@@ -57,8 +56,8 @@ class Enemy {
         ((eLeft > left && eLeft < right) || (eRight < right && eRight > left))
       )
     ) {
-      clearInterval(game.playerShot);
-      clearInterval(this.firingRate);
+      // clearInterval(game.playerShot);
+      // clearInterval(this.firingRate);
       // clearInterval(game.enemyShot);
 
       console.log("player and enemy collide");
@@ -107,7 +106,7 @@ class Enemy {
     // }
     if (this.y > 550) {
       // clearInterval(this.firingRate);
-      delete this.projectile;
+      // delete this.projectile;
       game.removeEnemy(this.id)
     }
   }
