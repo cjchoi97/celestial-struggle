@@ -13,6 +13,7 @@ class Game {
     this.player = new Player(this.ctx);
     // this.enemy = new Enemy(this.ctx);
     this.playerProjectiles = [];
+    this.enemyProjectiles = [];
     this.draw = this.draw.bind(this);
 
     this.setupControls();
@@ -74,11 +75,13 @@ class Game {
   setupControls() {
     new Controls(this.ctx);
   }
+
   addProjectile(newTime) {
     const newPlayerShot = this.player.fireProjectile();
     this.playerProjectiles.push(newPlayerShot);
     return newTime;
   }
+
   draw(timestamp) {
     // console.log(timestamp);
     this.startTime =
