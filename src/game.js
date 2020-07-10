@@ -21,6 +21,7 @@ class Game {
     this.levels = [level1];
     this.levelidx = 0;
     this.startTime = 0;
+    this.enemyTime = 0;
     this.gameOnGoing = false;
     this.setupLevel();
   }
@@ -82,28 +83,51 @@ class Game {
     return newTime;
   }
 
+  addEnemyProjectile(newTime, i) {
+    const newEnemyShot = this.enemies[i].fireProjectile();
+    this.enemyProjectiles.push(newEnemyShot);
+    return newTime;
+  }
+
   draw(timestamp) {
     // console.log(timestamp);
+
+    //====== Player firing Rate ======//
     this.startTime =
-      timestamp - this.startTime > 300
+      timestamp - this.startTime > 300 //every 300 miliseconds
         ? this.addProjectile(timestamp)
         : this.startTime;
-    const miliseconds = timestamp - this.startTime;
+
+    // const miliseconds = timestamp - this.startTime;
     // console.log(seconds.toFixed(2));
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.renderBackground();
-    this.player.draw();
+    this.player.draw(); //draw the player on every frame
+
+    //====== Drawing Enemies ======//
     for (let i = 0; i < this.enemies.length; i++) {
-      if (this.enemies[i]) {
+      if (this.enemies[i] !== undefined) {
         this.enemies[i].draw(timestamp);
+        if (this.enemies[i].y > 0 ) {
+          //====== Enemy Projectiles ======//
+          this.enemies[i].time = 
+            timestamp - this.enemies[i].time > 2000 //every 2 seconds
+            ? this.addEnemyProjectile(timestamp, i) 
+            : this.enemies[i].time;
+        }
       }
     }
 
+    //====== Drawing Projectiles ======//
     this.playerProjectiles.map((projectile) => projectile.draw());
+    this.enemyProjectiles.map((projectile) => projectile.draw());
+
+    //====== Checking for remaining enemies ======//
     if (!this.enemiesLeft()) {
       this.gameOnGoing = false;
       return;
     }
+
     this.animationLoop = requestAnimationFrame(this.draw);
   }
 
