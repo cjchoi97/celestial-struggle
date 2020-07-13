@@ -23,6 +23,7 @@ class Game {
     this.startTime = 0;
     this.enemyTime = 0;
     this.gameOnGoing = false;
+    this.gameFinished = false;
     this.setupLevel();
   }
 
@@ -36,11 +37,17 @@ class Game {
 
     this.setupControls();
 
+    for (let i = 0; i < this.enemies.lengthl; i++) {
+      delete this.enemies[i];
+    }
+
+    this.enemies = [];
     this.levels = [level1];
     this.levelidx = 0;
     this.startTime = 0;
     this.gameOnGoing = false;
     this.setupLevel();
+
   }
 
   enemiesLeft() {
@@ -88,7 +95,12 @@ class Game {
     this.enemyProjectiles.push(newEnemyShot);
     return newTime;
   }
-
+  
+  gameOver() {
+    document.getElementById("end-modal").style.display = "block";
+    console.log("We here");
+  }
+  
   draw(timestamp) {
 
     //====== Player firing Rate ======//
@@ -122,6 +134,7 @@ class Game {
     //====== Checking for remaining enemies ======//
     if (!this.enemiesLeft()) {
       this.gameOnGoing = false;
+      this.gameOver();
       return;
     }
 
@@ -147,10 +160,13 @@ class Game {
   }
 
   pause() {
+
     if (this.animationLoop) {
+      console.log("GAME SHOULD PAUSE")
       cancelAnimationFrame(this.animationLoop);
     }
   }
+
 }
 
 export default Game;

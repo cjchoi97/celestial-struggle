@@ -16,11 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.closePath();
 
   game = new Game(canvas, ctx);
+
+  // if (!game.gameOnGoing) {
+  //   document.getElementById("modal").style.display = "block";
+  // }
   window.game = game;
-  document.querySelector("h1").onclick = (e) => {
-    game.pause();
-    game.reset();
-    game.start();
-    window.game = game;
-  };
 });
