@@ -105,7 +105,7 @@ class Game {
     for (let i = 0; i < this.enemies.length; i++) {
       if (this.enemies[i] !== undefined) {
         this.enemies[i].draw(timestamp);
-        if (this.enemies[i].y > 0 ) {
+        if (this.enemies[i] && this.enemies[i].y > 0 ) {
           //====== Enemy Projectiles ======//
           this.enemies[i].time = 
             timestamp - this.enemies[i].time > 3000 //every 2 seconds
