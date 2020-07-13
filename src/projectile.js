@@ -50,7 +50,14 @@ class Projectile {
           !(this.hitbox[3] > enemyHitBox[2])
         ) {
           // clearInterval(game.playerShot);
-          game.playerProjectiles = [];
+          game.player.lives--;
+          game.player.x = this.ctx.canvas.width / 2.2;
+          game.player.y = this.ctx.canvas.height - 50;
+          if (game.player.lives === 0) {
+            console.log("WE HAVE LOST")
+            game.playerProjectiles = [];
+            game.pause();
+          }
           delete this;
           console.log("player hit by enemy bullet");
         }

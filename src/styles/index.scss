@@ -61,3 +61,25 @@ p {
   margin-left: 300px;
   top: 30%;
 }
+
+.modal {
+  position: absolute;
+  height: 100%;
+  width: 500px;
+  align-self: center;
+  left: 50%;
+  margin-left: -250px;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal p {
+  color: white;
+  text-shadow: 0 0 22px #13AABF;
+  font-size: 30px;
+  margin-top: 250px;
+  font-weight: bold;
+}
+
+.end {
+  display: none;
+}

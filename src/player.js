@@ -14,6 +14,8 @@ class Player {
     this.dx = 0;
     this.dy = 0;
 
+    this.lives = 3;
+
     this.fireProjectile = this.fireProjectile.bind(this);
   }
 

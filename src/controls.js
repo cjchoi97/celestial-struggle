@@ -25,7 +25,13 @@ class Controls {
       } else if (e.key === "s") {
         game.player.moveVertically(5);
       } else if (e.key === "p" && game.gameOnGoing === false) {
+        document.getElementById("modal").style.display = "none";
         game.start();
+      } else if (e.key === "r") {
+        game.pause();
+        game.reset();
+        game.start();
+        document.getElementById("end-modal").style.display = "none";
       }
     }
   }
