@@ -34,7 +34,8 @@ class Projectile {
               console.log("enemy hit by player bullet");
               // clearInterval(game.enemyShot);
               game.removeEnemy(i);
-              this.y = 551;
+              // this.y = 551;
+              delete this;
               //increment score
             }
           }
@@ -51,13 +52,14 @@ class Projectile {
         ) {
           // clearInterval(game.playerShot);
           game.player.lives--;
-          game.player.x = this.ctx.canvas.width / 2.2;
-          game.player.y = this.ctx.canvas.height - 50;
+          // game.player.x = this.ctx.canvas.width / 2.2;
+          // game.player.y = this.ctx.canvas.height - 50;
           if (game.player.lives === 0) {
             console.log("WE HAVE LOST")
             game.playerProjectiles = [];
             game.pause();
           }
+          game.player.recenter();
           delete this;
           console.log("player hit by enemy bullet");
         }

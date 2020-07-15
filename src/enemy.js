@@ -19,6 +19,9 @@ class Enemy {
     this.draw = this.draw.bind(this);
     this.fireProjectile = this.fireProjectile.bind(this);
     this.selfTimer = this.selfTimer.bind(this);
+    this.detectCollision = this.detectCollision.bind(this);
+
+    this.projectiles = [];
 
     // if (this.y > 0 && this.y < 1) {
     //   console.log("here");
@@ -63,6 +66,11 @@ class Enemy {
       console.log("player and enemy collide");
 
       game.removeEnemy(this.id);
+      game.player.lives--;
+      if (game.player.lives === 0) {
+        game.pause()
+      }
+      game.player.recenter();
       /* kill player too */
     }
   }
@@ -95,6 +103,9 @@ class Enemy {
     //   console.log("this.time");
     // }
     this.ctx.drawImage(this.enemyImg, this.x, this.y, this.width, this.height);
+
+    this.projectiles.map((projectile) => projectile.draw());
+
     this.detectCollision();
     // if (this.y > 0 && this.y < 1) {
     //   // this.time = 0;

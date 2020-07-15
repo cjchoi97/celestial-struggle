@@ -14,9 +14,15 @@ class Player {
     this.dx = 0;
     this.dy = 0;
 
+
     this.lives = 3;
 
     this.fireProjectile = this.fireProjectile.bind(this);
+  }
+
+  recenter() {
+    this.x = this.ctx.canvas.width / 2.2;
+    this.y = this.ctx.canvas.height - 50;
   }
 
   hitBox() {
