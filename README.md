@@ -85,7 +85,7 @@ This is the general game loop and as you can see, a timer was set up using the "
 As you can see, projectiles are added to their respective arrays at certain time intervals, and that's when they are drawn onto the screen.
 
 ## Architecture and Technology
-* Javascript for game logic
+* JavaScript for game logic
 * CanvasHTML for rendering game 
 * CSS3 for styling
 * Webpack for bundling files
