@@ -1,4 +1,4 @@
-# Celestial Struggle Project Proposal
+[Celestial Struggle Live Link](https://cjchoi97.github.io/celestial-struggle/ "Celestial Struggle Live Link")
 
 ## Background and Overview
 Celestial Struggle is a game similar to Galaga. You can move your ship that shoots projectiles at incoming enemies. The goal is to conquer space while struggling to get through the levels that increase in difficulty as you go along. 
