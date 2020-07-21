@@ -20,7 +20,7 @@ Celestial Struggle is a chaotic spin of the classic space shooter Galaga. The go
 Whether it's the enemy or you, the player, every ship shown on the screen will fire projectiles at a certain frequency and with a certain projectile velocity.
 
 
-Figuring out the timing for bullets to fire withing the animation frame was difficult definitely challenging. 
+Figuring out the timing for bullets to fire withing the animation frame was definitely challenging. 
 
 
 ```javascript
