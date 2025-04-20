@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const outputDir = "./dist";
@@ -84,5 +85,9 @@ module.exports = {
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
     require("autoprefixer"),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "index.html"), // adjust if your HTML file is elsewhere
+      filename: "index.html",
+    })    
   ],
 };
