@@ -1,27 +1,3 @@
-// class Background {
-//   constructor(ctx) {
-//     this.ctx = ctx;
-//     this.backgroundImg = new Image();
-//     this.backgroundImg.src = './src/assets/space-background.png';
-//     this.canvasHeight = ctx.canvas.height;
-//     this.canvasWidth = ctx.canvas.width;
-//     this.y = 0;
-
-//     this.draw = this.draw.bind(this);
-//   }
-
-//   draw() {
-//     // debugger
-//     this.y += 0.5;
-//     this.ctx.drawImage(this.backgroundImg, 0, this.y);
-//     this.ctx.drawImage(this.backgroundImg, 0, this.y - this.canvasHeight);
-//     if (this.y === this.canvasHeight) this.y = 0;
-//     // requestAnimationFrame(this.draw); 
-//   }
-// }
-
-// export default Background;
-
 class Background {
   constructor(ctx) {
     this.ctx = ctx;
@@ -59,8 +35,7 @@ class Background {
   draw() {
     // Draw a dark blue/black gradient background
     const gradient = this.ctx.createLinearGradient(0, 0, 0, this.canvasHeight);
-    gradient.addColorStop(0, '#000033');
-    gradient.addColorStop(1, '#000015');
+    gradient.addColorStop(0, '#000000');
     this.ctx.fillStyle = gradient;
     this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
     
