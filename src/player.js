@@ -30,7 +30,6 @@ class Player {
   }
 
   moveHorizontally(speed) {
-    // console.log(this.x);
     this.dx = speed;
   }
 
@@ -47,19 +46,26 @@ class Player {
       img: "./src/assets/basic-projectile.png",
       type: "player",
     });
-    // console.log("MADE PROJECTILE")
-
-    // projectile.draw();
     return projectile;
   }
 
   draw() {
-    // debugger
-    this.x += this.dx;
-    this.y += this.dy;
-    // this.fireProjectile();
+    // Calculate next position
+    let nextX = this.x + this.dx;
+    let nextY = this.y + this.dy;
+  
+    // Clamp the values so the player stays within bounds
+    if (nextX < 0) nextX = 0;
+    if (nextX > this.ctx.canvas.width - this.width) nextX = this.ctx.canvas.width - this.width;
+    if (nextY < 0) nextY = 0;
+    if (nextY > this.ctx.canvas.height - this.height) nextY = this.ctx.canvas.height - this.height;
+  
+    // Update position
+    this.x = nextX;
+    this.y = nextY;
+  
+    // Draw the player
     this.ctx.drawImage(this.playerImg, this.x, this.y, this.width, this.height);
-    // requestAnimationFrame(this.draw);
   }
 
   updateLivesDisplay() {
