@@ -21,7 +21,7 @@ function level1(ctx) {
       width: 70,
       x: generateHorizontal(),
       y: generateVertical(),
-      dy: 1,
+      dy: Math.random() * 1.5 - 0.5,
       id: i
     });
 
