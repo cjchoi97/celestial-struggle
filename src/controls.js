@@ -8,13 +8,9 @@ class Controls {
     this.keyUpHandler = this.keyUpHandler.bind(this);
     window.addEventListener("keydown", this.keyDownHandler);
     window.addEventListener("keyup", this.keyUpHandler);
-    // this.keydown = null;
   }
 
   keyDownHandler(e) {
-    // console.log(this.keydown);
-    // console.log("pressed");
-    // this.keydown = true;
     if (game.player) {
       if (e.key === "d") {
         game.player.moveHorizontally(5);

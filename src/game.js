@@ -120,7 +120,6 @@ class Game {
       if (this.enemies[i]) {
         this.enemies[i].draw(timestamp);
         
-        // this.enemies[i].projectiles.map((projectile) => projectile.draw());
         if (this.enemies[i] && this.enemies[i].y > 0 ) {
           //====== Enemy Projectiles ======//
           this.enemies[i].time = 

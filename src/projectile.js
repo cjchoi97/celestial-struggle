@@ -20,7 +20,6 @@ class Projectile {
     this.hitbox = [this.x, this.x + this.width, this.y + this.height, this.y];
 
     if (this.type === "player") {
-      // console.log("player");
       if (game.enemies) {
         for (let i = 0; i < game.enemies.length; i++) {
           if (game.enemies[i]) {
@@ -32,9 +31,7 @@ class Projectile {
               !(this.hitbox[2] < enemyHitBox[3])
             ) {
               console.log("enemy hit by player bullet");
-              // clearInterval(game.enemyShot);
               game.removeEnemy(i);
-              // this.y = 551;
               delete this;
               //increment score
             }
@@ -50,11 +47,8 @@ class Projectile {
           this.hitbox[1] <= enemyHitBox[1] &&
           !(this.hitbox[3] > enemyHitBox[2])
         ) {
-          // clearInterval(game.playerShot);
           game.player.lives--;
           game.player.updateLivesDisplay()
-          // game.player.x = this.ctx.canvas.width / 2.2;
-          // game.player.y = this.ctx.canvas.height - 50;
           if (game.player.lives === 0) {
             console.log("WE HAVE LOST")
             game.playerProjectiles = [];
@@ -78,10 +72,7 @@ class Projectile {
       this.height
     );
     this.detectHit();
-    // setTimeout(() => requestAnimationFrame(this.draw), 1000/20);
-    // console.log("fire");
     if (this.y > 550) return;
-    // requestAnimationFrame(this.draw);
   }
 }
 
