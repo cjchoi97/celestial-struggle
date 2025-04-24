@@ -61,6 +61,13 @@ class Player {
     this.ctx.drawImage(this.playerImg, this.x, this.y, this.width, this.height);
     // requestAnimationFrame(this.draw);
   }
+
+  updateLivesDisplay() {
+    const livesDisplay = document.getElementById("lives-display")
+    if (livesDisplay) {
+      livesDisplay.textContent = `Lives: ${this.lives}`;
+    }
+  }
 }
 
 export default Player;

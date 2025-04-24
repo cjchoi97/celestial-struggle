@@ -67,6 +67,7 @@ class Enemy {
 
       game.removeEnemy(this.id);
       game.player.lives--;
+      game.player.updateLivesDisplay()
       if (game.player.lives === 0) {
         game.pause()
       }

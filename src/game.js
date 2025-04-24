@@ -32,6 +32,7 @@ class Game {
     this.background = new Background(this.ctx);
     // this.player = null;
     this.player = new Player(this.ctx);
+    this.player.updateLivesDisplay();
     // this.enemy = new Enemy(this.ctx);
     this.playerProjectiles = [];
     this.draw = this.draw.bind(this);
@@ -48,7 +49,7 @@ class Game {
     this.startTime = 0;
     this.gameOnGoing = false;
     this.setupLevel();
-
+    this.player.updateLivesDisplay();
   }
 
   enemiesLeft() {
@@ -109,7 +110,7 @@ class Game {
   }
   
   draw(timestamp) {
-
+    if (!this.gameOnGoing) return;
     //====== Player firing Rate ======//
     this.startTime =
       (timestamp - this.startTime > 300) //every 300 miliseconds
@@ -183,6 +184,8 @@ class Game {
       console.log("GAME SHOULD PAUSE")
       cancelAnimationFrame(this.animationLoop);
     }
+    this.gameOnGoing = false;
+    this.gameOver()
   }
 
 }

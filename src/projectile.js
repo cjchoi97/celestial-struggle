@@ -52,6 +52,7 @@ class Projectile {
         ) {
           // clearInterval(game.playerShot);
           game.player.lives--;
+          game.player.updateLivesDisplay()
           // game.player.x = this.ctx.canvas.width / 2.2;
           // game.player.y = this.ctx.canvas.height - 50;
           if (game.player.lives === 0) {
